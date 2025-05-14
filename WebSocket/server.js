@@ -15,7 +15,8 @@ io.on('connection', (socket) => {
     
     var msg = {
         texto: mensagem.texto,
-        id: socket.id
+        id: socket.id,
+        data: new Date().toISOString()
     }
 
     console.log('Mensagem recebida:', msg);
@@ -27,6 +28,6 @@ io.on('connection', (socket) => {
   });
 });
 
-httpServer.listen(8080, () => {
-  console.log('Socket.IO ouvindo em http://localhost:8080');
+httpServer.listen(5004, () => {
+  console.log('Socket.IO ouvindo em http://localhost:5004');
 });
