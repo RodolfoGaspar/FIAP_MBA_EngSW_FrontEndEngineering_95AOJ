@@ -5,22 +5,24 @@ const { Server } = require('socket.io');
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-  cors: { origin: "*" } // Configure CORS conforme necessário
+  cors: { origin: "*" } 
 });
 
 io.on('connection', (socket) => {
   console.log('Cliente conectado:', socket.id);
 
-  socket.on('notificacao', (mensagem) => {
+  socket.on('notificacaoNovaVaga', (mensagem) => {
     
     var msg = {
-        texto: mensagem.texto,
-        id: socket.id,
-        data: new Date().toISOString()
+      idEstacionamento: mensagem.idEstacionamento,
+      status: mensagem.status,
+      tipoVaga: mensagem.tipoVaga,
+      id: socket.id,
+      data: new Date().toISOString()
     }
 
     console.log('Mensagem recebida:', msg);
-    io.emit('notificacao', msg); // Broadcast para todos
+    io.emit('notificacaoNovaVaga', msg); // Broadcast para todos
   });
 
   socket.on('disconnect', () => {
