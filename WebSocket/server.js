@@ -17,6 +17,7 @@ io.on('connection', (socket) => {
       idEstacionamento: mensagem.idEstacionamento,
       status: mensagem.status,
       tipoVaga: mensagem.tipoVaga,
+      valorHora: mensagem.valorHora,
       id: socket.id,
       data: new Date().toISOString()
     }
@@ -24,6 +25,23 @@ io.on('connection', (socket) => {
     console.log('Mensagem recebida:', msg);
     io.emit('notificacaoNovaVaga', msg); // Broadcast para todos
   });
+
+  socket.on('notificacaoAlteracaoDeVaga', (mensagem) => {
+    
+    var msg = {
+      idVaga: mensagem.id,  
+      idEstacionamento: mensagem.idEstacionamento,
+      status: mensagem.status,
+      tipoVaga: mensagem.tipoVaga,
+      valorHora: mensagem.valorHora,
+      id: socket.id,
+      data: new Date().toISOString()
+    }
+
+    console.log('Mensagem recebida:', msg);
+    io.emit('notificacaoAlteracaoDeVaga', msg); // Broadcast para todos
+  });
+
 
   socket.on('disconnect', () => {
     console.log('Cliente desconectado:', socket.id);
