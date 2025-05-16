@@ -54,8 +54,6 @@ io.on('connection', (socket) => {
     io.emit('notificacaoExcluirVaga', msg); // Broadcast para todos
   });
 
-
-
   socket.on('disconnect', () => {
     console.log('Cliente desconectado:', socket.id);
   });
