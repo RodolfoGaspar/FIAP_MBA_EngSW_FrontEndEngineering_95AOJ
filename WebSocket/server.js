@@ -18,11 +18,11 @@ io.on('connection', (socket) => {
       status: mensagem.status,
       tipoVaga: mensagem.tipoVaga,
       valorHora: mensagem.valorHora,
-      id: socket.id,
+      idClient: socket.id,
       data: new Date().toISOString()
     }
 
-    console.log('Mensagem recebida:', msg);
+    console.log('Mensagem recebida - Nova Vaga:', msg);
     io.emit('notificacaoNovaVaga', msg); // Broadcast para todos
   });
 
@@ -34,13 +34,26 @@ io.on('connection', (socket) => {
       status: mensagem.status,
       tipoVaga: mensagem.tipoVaga,
       valorHora: mensagem.valorHora,
-      id: socket.id,
+      idClient: socket.id,
       data: new Date().toISOString()
     }
 
-    console.log('Mensagem recebida:', msg);
+    console.log('Mensagem recebida - Alteracao de Vaga:', msg);
     io.emit('notificacaoAlteracaoDeVaga', msg); // Broadcast para todos
   });
+
+  socket.on('notificacaoExcluirVaga', (mensagem) => {
+    
+    var msg = {
+      idVaga: mensagem.id,
+      idClient: socket.id,
+      data: new Date().toISOString()
+    }
+
+    console.log('Mensagem recebida - Excluir Vaga:', msg);
+    io.emit('notificacaoExcluirVaga', msg); // Broadcast para todos
+  });
+
 
 
   socket.on('disconnect', () => {
