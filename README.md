@@ -1,76 +1,158 @@
-# Sistema de Gerenciamento de Estacionamento  
+# SmartPark - Sistema de Gerenciamento de Estacionamentos
 
-Repositório para o trabalho final da matéria de Engineering Software Development do MBA de Engenharia de Software da FIAP - 2025.
+Este repositório contém as APIs e serviços que compõem o sistema SmartPark, uma solução completa para gerenciamento de estacionamentos.
 
-Solução para gestão de vagas, reservas e pagamentos em estacionamentos, com APIs em .NET Core (C#), base de dados em SQLite, frontend em React.Js e suporte a Docker.  
+## 🚀 Tecnologias Utilizadas
 
-## Estrutura do Projeto
+- .NET 6.0
+- Entity Framework Core
+- SQLite
+- WebSocket
+- Swagger
+- Docker
 
-**Backend**  
+## 📋 Pré-requisitos
 
-- `VagasAPI`: Microserviço de gerenciamento de vagas
-- `ReservasAPI`: Microserviço de gerenciamente de reservas, com validação de horários  
-- `PagamentosAPI`: Microserviço de gerenciamento de pagamento  
- 
+- [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [Docker](https://www.docker.com/products/docker-desktop) (opcional)
+- [Postman](https://www.postman.com/downloads/) (para testes)
+- [Visual Studio](https://visualstudio.microsoft.com/pt-br/) ou [VS Code](https://code.visualstudio.com/)
 
-**Frontend**  
+## 🔧 Instalação e Execução Local
 
-- `ParkingFrontend`: Aplicação React.Js 
-
-**DevOps**  
-
-- `docker-compose.yml`: Orquestração de containers  
-- `Dockerfiles`: Configurações individuais para cada serviço
-
-⚙️ **SmartPark - CI/CD Pipeline.
-Este repositório utiliza GitHub Actions para automatizar o build e a publicação das imagens Docker. A cada push na branch main, o pipeline executa os seguintes passos:**
-
-- Checkout do código
-- Autenticação no Docker Hub
-- Build e publicação dos binários das APIs .NET
-- Build das imagens Docker com docker compose
-- Push das imagens para o Docker Hub
-
-## 🚀 Primeiros Passos  
-
-### Pré-requisitos  
-
-- .NET Core 6.0 SDK  
-- Node.js 22.14 
-- Docker 28.0.1  
-- Postman/Newman (para testes de API)  
-
-## ▶️ Execução  
-
-### Via Docker  
-
-Com o Docker instalado, execute os comandos na raiz do projeto.
-
+### 1. Clone o Repositório
 ```bash
-docker-compose pull
-docker-compose up -d
+git clone [URL_DO_REPOSITÓRIO]
+cd [NOME_DO_REPOSITÓRIO]
 ```
 
-## 🧪 Testes  
+### 2. Configuração dos Projetos
 
-### Postman  
+#### VagasAPI
+```bash
+cd VagasAPI
+dotnet restore
+dotnet build
+dotnet run
+```
+- URL Local: http://localhost:5001
+- Swagger: http://localhost:5001/swagger
+- URL Produção: https://vagasapi-production.up.railway.app
 
-Importe as collections e environments do diretório `/postman`  
+#### PagamentosAPI
+```bash
+cd PagamentosAPI
+dotnet restore
+dotnet build
+dotnet run
+```
+- URL Local: http://localhost:5002
+- Swagger: http://localhost:5002/swagger
+- URL Produção: https://pagamentosapi-production.up.railway.app
 
-**Workspace Público**: [🔗 Link do Postman](https://www.postman.com/smart-park-7334/fiap-95aoj/overview)  
+#### ReservasAPI
+```bash
+cd ReservasAPI
+dotnet restore
+dotnet build
+dotnet run
+```
+- URL Local: http://localhost:5003
+- Swagger: http://localhost:5003/swagger
 
-Como alternativa, as collections e enviroments do postman também estão disponíveis no diretório `Postman` deste repositório, seguindo a seguinte estrutura:
+#### WebSocket
+```bash
+cd WebSocket
+npm install
+npm start
+```
+- URL Local: http://localhost:5004
+- URL Produção: https://smartparkwebsocket-production.up.railway.app
 
-- `Collections`: Collections individuais para cada API, para o fluxo de sucesso e de validações
-- `Enviroment`: Enviroment para testes em ambiente local (localhost)
-- `Results`: Resultados dos testes (via runner) realizados em ambiente de desenvolvimento
+## 🧪 Testes
 
-## 🐳 Docker Hub  
+### Via Swagger
+1. Acesse a URL do Swagger de cada API conforme listado acima
+2. Autentique-se (se necessário)
+3. Teste os endpoints disponíveis
 
-- **API's**: [🔗 Imagem Docker - Backend](https://hub.docker.com/r/rodolfogaspar86/fiap_95aoj_smart_park-backend)
-- **Frontend**: [🔗 Imagem Docker - Frontend](https://hub.docker.com/r/rodolfogaspar86/fiap_95aoj_smart_park-frontend) 
+### Via Postman
+1. Importe a coleção do Postman localizada em `/Postman`
+2. Configure as variáveis de ambiente:
+   - `base_url_vagas`: https://vagasapi-production.up.railway.app
+   - `base_url_pagamentos`: https://pagamentosapi-production.up.railway.app
+   - `base_url_reservas`: https://reservasapi-production.up.railway.app
+   - `websocket_url`: https://smartparkwebsocket-production.up.railway.app
 
+## 📦 Endpoints Principais
 
-## 📄 Licença  
+### VagasAPI
+- GET /v1/vagas - Lista todas as vagas
+- GET /v1/vagas/{id} - Obtém uma vaga específica
+- POST /v1/vagas - Cria uma nova vaga
+- PUT /v1/vagas - Atualiza uma vaga
+- DELETE /v1/vagas/{id} - Remove uma vaga
 
-Distribuído sob licença MIT. Veja `LICENSE` para detalhes.
+### PagamentosAPI
+- GET /v1/pagamentos - Lista todos os pagamentos
+- GET /v1/pagamentos/{id} - Obtém um pagamento específico
+- POST /v1/pagamentos - Cria um novo pagamento
+- PUT /v1/pagamentos - Atualiza um pagamento
+- DELETE /v1/pagamentos/{id} - Remove um pagamento
+
+### ReservasAPI
+- GET /v1/reservas - Lista todas as reservas
+- GET /v1/reservas/{id} - Obtém uma reserva específica
+- POST /v1/reservas - Cria uma nova reserva
+- PUT /v1/reservas - Atualiza uma reserva
+- DELETE /v1/reservas/{id} - Remove uma reserva
+
+### WebSocket
+- Evento: notificacaoNovaVaga
+- Evento: notificacaoAlteracaoDeVaga
+- Evento: notificacaoExcluirVaga
+
+## 🔄 Fluxo de Dados
+
+1. O sistema de vagas (VagasAPI) gerencia a disponibilidade das vagas
+2. O sistema de reservas (ReservasAPI) permite que usuários reservem vagas
+3. O sistema de pagamentos (PagamentosAPI) processa os pagamentos das reservas
+4. O WebSocket mantém todos os clientes atualizados sobre mudanças em tempo real
+
+## 🐳 Docker
+
+Para executar os projetos via Docker:
+
+```bash
+# VagasAPI
+docker build -t vagasapi .
+docker run -p 5001:5001 vagasapi
+
+# PagamentosAPI
+docker build -t pagamentosapi .
+docker run -p 5002:5002 pagamentosapi
+
+# ReservasAPI
+docker build -t reservasapi .
+docker run -p 5003:5003 reservasapi
+
+# WebSocket
+docker build -t websocket .
+docker run -p 5004:5004 websocket
+```
+
+## 📝 Notas Adicionais
+
+- Todas as APIs utilizam SQLite como banco de dados
+- Os dados são persistidos localmente em arquivos .db
+- O WebSocket utiliza Socket.IO para comunicação em tempo real
+- Todas as APIs possuem documentação Swagger
+- O CORS está configurado para permitir requisições de qualquer origem
+
+## 🤝 Contribuição
+
+1. Faça o fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
