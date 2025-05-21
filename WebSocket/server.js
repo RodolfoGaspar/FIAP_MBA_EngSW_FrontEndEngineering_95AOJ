@@ -1,6 +1,27 @@
+const { z } = require('zod'); // Adicione no topo do arquivo
 const express = require('express');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
+
+// Esquemas de validação Zod
+const NovaVagaSchema = z.object({
+  idEstacionamento: z.string(),
+  status: z.number(),
+  tipoVaga: z.number(),
+  valorHora: z.number()
+});
+
+const AlteracaoVagaSchema = z.object({
+  id: z.string(), // Corresponde ao idVaga
+  idEstacionamento: z.string(),
+  status: z.string(),
+  tipoVaga: z.string(),
+  valorHora: z.number()
+});
+
+const ExcluirVagaSchema = z.object({
+  id: z.string() // Corresponde ao idVaga
+});
 
 const app = express();
 const httpServer = createServer(app);
@@ -12,46 +33,58 @@ io.on('connection', (socket) => {
   console.log('Cliente conectado:', socket.id);
 
   socket.on('notificacaoNovaVaga', (mensagem) => {
-    
-    var msg = {
-      idEstacionamento: mensagem.idEstacionamento,
-      status: mensagem.status,
-      tipoVaga: mensagem.tipoVaga,
-      valorHora: mensagem.valorHora,
-      idClient: socket.id,
-      data: new Date().toISOString()
-    }
+    try {
+      const validatedData = NovaVagaSchema.parse(mensagem);
+      
+      const msg = {
+        ...validatedData,
+        idClient: socket.id,
+        data: new Date().toISOString()
+      };
 
-    console.log('Mensagem recebida - Nova Vaga:', msg);
-    io.emit('notificacaoNovaVaga', msg); // Broadcast para todos
+      console.log('Mensagem validada - Nova Vaga:', msg);
+      io.emit('notificacaoNovaVaga', msg);
+    } catch (error) {
+      console.error('Erro de validação Nova Vaga:', error.errors);
+    }
   });
 
   socket.on('notificacaoAlteracaoDeVaga', (mensagem) => {
-    
-    var msg = {
-      idVaga: mensagem.id,  
-      idEstacionamento: mensagem.idEstacionamento,
-      status: mensagem.status,
-      tipoVaga: mensagem.tipoVaga,
-      valorHora: mensagem.valorHora,
-      idClient: socket.id,
-      data: new Date().toISOString()
-    }
+    try {
+      const validatedData = AlteracaoVagaSchema.parse(mensagem);
+      
+      const msg = {
+        idVaga: validatedData.id,
+        idEstacionamento: validatedData.idEstacionamento,
+        status: validatedData.status,
+        tipoVaga: validatedData.tipoVaga,
+        valorHora: validatedData.valorHora,
+        idClient: socket.id,
+        data: new Date().toISOString()
+      };
 
-    console.log('Mensagem recebida - Alteracao de Vaga:', msg);
-    io.emit('notificacaoAlteracaoDeVaga', msg); // Broadcast para todos
+      console.log('Mensagem validada - Alteração de Vaga:', msg);
+      io.emit('notificacaoAlteracaoDeVaga', msg);
+    } catch (error) {
+      console.error('Erro de validação Alteração de Vaga:', error.errors);
+    }
   });
 
   socket.on('notificacaoExcluirVaga', (mensagem) => {
-    
-    var msg = {
-      idVaga: mensagem.id,
-      idClient: socket.id,
-      data: new Date().toISOString()
-    }
+    try {
+      const validatedData = ExcluirVagaSchema.parse(mensagem);
+      
+      const msg = {
+        idVaga: validatedData.id,
+        idClient: socket.id,
+        data: new Date().toISOString()
+      };
 
-    console.log('Mensagem recebida - Excluir Vaga:', msg);
-    io.emit('notificacaoExcluirVaga', msg); // Broadcast para todos
+      console.log('Mensagem validada - Excluir Vaga:', msg);
+      io.emit('notificacaoExcluirVaga', msg);
+    } catch (error) {
+      console.error('Erro de validação Excluir Vaga:', error.errors);
+    }
   });
 
   socket.on('disconnect', () => {
