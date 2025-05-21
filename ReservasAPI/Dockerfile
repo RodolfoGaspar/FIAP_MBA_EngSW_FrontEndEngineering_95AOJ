@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
 # Copia os arquivos do projeto
-COPY ["ReservasApi.csproj", "./"]
+COPY ["ReservasAPI.csproj", "./"]
 RUN dotnet restore
 
 # Copia o resto dos arquivos e faz o build
@@ -29,4 +29,4 @@ ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
 EXPOSE ${PORT}
 
 # Inicia a aplicação
-ENTRYPOINT ["dotnet", "ReservasApi.dll"]
+ENTRYPOINT ["dotnet", "ReservasAPI.dll"]
