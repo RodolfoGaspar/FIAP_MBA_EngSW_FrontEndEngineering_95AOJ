@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
 # Copia os arquivos do projeto
-COPY ["VagasApi.csproj", "./"]
+COPY ["ReservasApi.csproj", "./"]
 RUN dotnet restore
 
 # Copia o resto dos arquivos e faz o build
@@ -19,14 +19,14 @@ WORKDIR /app
 
 # Copia os arquivos publicados
 COPY --from=build /app/publish .
-COPY ./Vagas.db /app/Vagas.db
+COPY ./Reservas.db /app/Reservas.db
 
 # Define a variável de ambiente PORT que o Railway fornece
-ENV PORT=5001
+ENV PORT=5002
 ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
 
 # Expose a porta dinâmica
 EXPOSE ${PORT}
 
 # Inicia a aplicação
-ENTRYPOINT ["dotnet", "VagasApi.dll"]
+ENTRYPOINT ["dotnet", "ReservasApi.dll"]
