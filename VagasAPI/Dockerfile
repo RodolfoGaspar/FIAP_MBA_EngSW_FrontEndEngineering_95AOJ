@@ -10,8 +10,12 @@ COPY ./out/ ./VagasAPI/
 # Copiar o banco de dados SQLite para dentro do container
 COPY ./Vagas.db /app/Vagas.db
 
-# Expose as portas
-EXPOSE 5001
+# Define a variável de ambiente PORT que o Railway fornece
+ENV PORT=5001
+ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
+
+# Expose a porta dinâmica
+EXPOSE ${PORT}
 
 # Inicia a aplicação
-CMD ["sh", "-c", "pwd & dotnet VagasAPI/VagasApi.dll --urls=http://0.0.0.0:5001 & wait"]
+CMD ["dotnet", "VagasAPI/VagasApi.dll"]
