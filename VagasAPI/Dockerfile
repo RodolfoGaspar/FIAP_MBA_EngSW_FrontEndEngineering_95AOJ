@@ -3,15 +3,15 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
 # Copia os arquivos do projeto
-COPY ["VagasAPI/VagasAPI.csproj", "VagasAPI/"]
-RUN dotnet restore "VagasAPI/VagasAPI.csproj"
+COPY ["VagasApi.csproj", "VagasApi/"]
+RUN dotnet restore "VagasApi/VagasApi.csproj"
 
 # Copia o resto dos arquivos e faz o build
 COPY . .
-RUN dotnet build "VagasAPI/VagasAPI.csproj" -c Release -o /app/build
+RUN dotnet build "VagasApi/VagasApi.csproj" -c Release -o /app/build
 
 # Publica a aplicação
-RUN dotnet publish "VagasAPI/VagasAPI.csproj" -c Release -o /app/publish
+RUN dotnet publish "VagasApi/VagasApi.csproj" -c Release -o /app/publish
 
 # Imagem final
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
@@ -29,4 +29,4 @@ ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
 EXPOSE ${PORT}
 
 # Inicia a aplicação
-CMD ["dotnet", "VagasAPI.dll"]
+CMD ["dotnet", "VagasApi.dll"]
