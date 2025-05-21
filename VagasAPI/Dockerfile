@@ -11,7 +11,7 @@ COPY . .
 RUN dotnet build "VagasApi/VagasApi.csproj" -c Release -o /app/build
 
 # Publica a aplicação
-RUN dotnet publish "VagasApi/VagasApi.csproj" -c Release -o /app/publish
+RUN dotnet publish "VagasApi/VagasApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Imagem final
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
@@ -29,4 +29,4 @@ ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
 EXPOSE ${PORT}
 
 # Inicia a aplicação
-CMD ["dotnet", "VagasApi.dll"]
+ENTRYPOINT ["dotnet", "VagasApi.dll"]
