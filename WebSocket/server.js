@@ -45,7 +45,10 @@ io.on('connection', (socket) => {
       console.log('Mensagem validada - Nova Vaga:', msg);
       io.emit('notificacaoNovaVaga', msg);
     } catch (error) {
-      console.error('Erro de validação Nova Vaga:', error.errors);
+      console.error('Erro de validação Nova Vaga:', {
+        errors: error.errors,
+        idClient: socket.id
+      });
     }
   });
 
@@ -66,7 +69,10 @@ io.on('connection', (socket) => {
       console.log('Mensagem validada - Alteração de Vaga:', msg);
       io.emit('notificacaoAlteracaoDeVaga', msg);
     } catch (error) {
-      console.error('Erro de validação Alteração de Vaga:', error.errors);
+      console.error('Erro de validação Alteração de Vaga:', {
+        errors: error.errors,
+        idClient: socket.id
+      });
     }
   });
 
@@ -83,7 +89,10 @@ io.on('connection', (socket) => {
       console.log('Mensagem validada - Excluir Vaga:', msg);
       io.emit('notificacaoExcluirVaga', msg);
     } catch (error) {
-      console.error('Erro de validação Excluir Vaga:', error.errors);
+      console.error('Erro de validação Excluir Vaga:', {
+        errors: error.errors,
+        idClient: socket.id
+      });
     }
   });
 
