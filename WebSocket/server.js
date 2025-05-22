@@ -5,22 +5,22 @@ const { Server } = require('socket.io');
 
 // Esquemas de validação Zod
 const NovaVagaSchema = z.object({
-  idEstacionamento: z.string(),
-  status: z.number(),
-  tipoVaga: z.number(),
-  valorHora: z.number()
+  idEstacionamento: z.string().trim().min(1),
+  status: z.number().int().min(0),
+  tipoVaga: z.number().int().min(0),
+  valorHora: z.number().min(0)
 });
 
 const AlteracaoVagaSchema = z.object({
-  id: z.string(), // Corresponde ao idVaga
-  idEstacionamento: z.string(),
-  status: z.string(),
-  tipoVaga: z.string(),
-  valorHora: z.number()
+  id: z.string().trim().min(1), // Corresponde ao idVaga
+  idEstacionamento: z.string().trim().min(1),
+  status: z.number().int().min(0),
+  tipoVaga: z.number().int().min(0),
+  valorHora: z.number().min(0)
 });
 
 const ExcluirVagaSchema = z.object({
-  id: z.string() // Corresponde ao idVaga
+  id: z.string().trim().min(1) // Corresponde ao idVaga
 });
 
 const app = express();
