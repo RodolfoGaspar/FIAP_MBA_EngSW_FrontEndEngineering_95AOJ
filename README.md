@@ -1,6 +1,7 @@
 # SmartPark - Sistema de Gerenciamento de Estacionamentos
 
-Este repositório contém as APIs, serviços e frontend que compõem o sistema SmartPark, uma solução completa para gerenciamento de estacionamentos.
+## 📝 Resumo da Aplicação
+O SmartPark é uma solução completa para gerenciamento de estacionamentos, oferecendo funcionalidades de controle de vagas, reservas e pagamentos em tempo real. O sistema permite o gerenciamento eficiente de vagas de estacionamento, com notificações em tempo real sobre disponibilidade, alterações e exclusões de vagas.
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -8,7 +9,7 @@ Este repositório contém as APIs, serviços e frontend que compõem o sistema S
 - .NET 6.0
 - Entity Framework Core
 - SQLite
-- WebSocket
+- WebSocket (Socket.IO)
 - Swagger
 - Docker
 
@@ -18,31 +19,27 @@ Este repositório contém as APIs, serviços e frontend que compõem o sistema S
 - Material-UI (MUI)
 - Socket.IO Client
 - Axios
-- React Router
 - React Query
-
-## 📋 Pré-requisitos
-
-### Backend
-- [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
-- [Docker](https://www.docker.com/products/docker-desktop) (opcional)
-- [Postman](https://www.postman.com/downloads/) (para testes)
-- [Visual Studio](https://visualstudio.microsoft.com/pt-br/) ou [VS Code](https://code.visualstudio.com/)
-
-### Frontend
-- [Node.js](https://nodejs.org/) (versão LTS)
-- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
-- [Git](https://git-scm.com/)
+- React Router
 
 ## 🔧 Instalação e Execução Local
 
-### 1. Clone o Repositório
+### Pré-requisitos
+- [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [Node.js](https://nodejs.org/) (versão LTS)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- [Git](https://git-scm.com/)
+- [Docker](https://www.docker.com/products/docker-desktop) (opcional)
+
+### Passos para Execução
+
+1. Clone o Repositório
 ```bash
-git clone [URL_DO_REPOSITÓRIO]
-cd [NOME_DO_REPOSITÓRIO]
+git clone https://github.com/rodolfocruz/FIAP_MBA_EngSW_FrontEndEngineering_95AOJ.git
+cd FIAP_MBA_EngSW_FrontEndEngineering_95AOJ
 ```
 
-### 2. Configuração do Backend
+2. Backend
 
 #### VagasAPI
 ```bash
@@ -52,8 +49,9 @@ dotnet build
 dotnet run
 ```
 - URL Local: http://localhost:5001
-- Swagger: http://localhost:5001/swagger
+- Swagger Local: http://localhost:5001/swagger
 - URL Produção: https://vagasapi-production.up.railway.app
+- Swagger Produção: https://vagasapi-production.up.railway.app/swagger
 
 #### PagamentosAPI
 ```bash
@@ -63,8 +61,9 @@ dotnet build
 dotnet run
 ```
 - URL Local: http://localhost:5002
-- Swagger: http://localhost:5002/swagger
+- Swagger Local: http://localhost:5002/swagger
 - URL Produção: https://pagamentosapi-production.up.railway.app
+- Swagger Produção: https://pagamentosapi-production.up.railway.app/swagger
 
 #### ReservasAPI
 ```bash
@@ -74,7 +73,9 @@ dotnet build
 dotnet run
 ```
 - URL Local: http://localhost:5003
-- Swagger: http://localhost:5003/swagger
+- Swagger Local: http://localhost:5003/swagger
+- URL Produção: https://reservasapi-production-4e97.up.railway.app
+- Swagger Produção: https://reservasapi-production.up.railway.app/swagger
 
 #### WebSocket
 ```bash
@@ -85,7 +86,7 @@ npm start
 - URL Local: http://localhost:5004
 - URL Produção: https://smartparkwebsocket-production.up.railway.app
 
-### 3. Configuração do Frontend
+3. Frontend
 
 #### BackOffice-SmartPark
 ```bash
@@ -95,6 +96,33 @@ npm start
 ```
 - URL Local: http://localhost:3000
 - URL Produção: https://smartpark-frontend.vercel.app
+
+## 🌐 Links da Aplicação
+
+### Frontend
+- Produção: https://smartpark-frontend.vercel.app
+
+### Backend
+- VagasAPI: https://vagasapi-production.up.railway.app
+- PagamentosAPI: https://pagamentosapi-production.up.railway.app
+- ReservasAPI: https://reservasapi-production-4e97.up.railway.app
+- WebSocket: https://smartparkwebsocket-production.up.railway.app
+
+### Documentação (Swagger)
+- VagasAPI: https://vagasapi-production.up.railway.app/swagger
+- PagamentosAPI: https://pagamentosapi-production.up.railway.app/swagger
+- ReservasAPI: https://reservasapi-production-4e97.up.railway.app/swagger
+
+## 📋 Pré-requisitos
+
+### Backend
+- [Postman](https://www.postman.com/downloads/) (para testes)
+- [Visual Studio](https://visualstudio.microsoft.com/pt-br/) ou [VS Code](https://code.visualstudio.com/)
+
+### Frontend
+- [Node.js](https://nodejs.org/) (versão LTS)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- [Git](https://git-scm.com/)
 
 ## 🧪 Testes
 
