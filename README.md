@@ -75,7 +75,7 @@ dotnet run
 - URL Local: http://localhost:5003
 - Swagger Local: http://localhost:5003/swagger
 - URL Produção: https://reservasapi-production-4e97.up.railway.app
-- Swagger Produção: [https://reservasapi-production.up.railway.app](https://reservasapi-production-4e97.up.railway.app)/swagger
+- Swagger Produção: https://reservasapi-production-4e97.up.railway.app/swagger
 
 #### WebSocket
 ```bash
