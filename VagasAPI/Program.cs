@@ -26,9 +26,20 @@ app.UseSwaggerUI();
 // Habilita o CORS na aplicação
 app.UseCors("PermitirTudo");
 
+var estacionamenos = new List<dynamic>
+    {
+        new { Id = "a080010f-6774-485c-826c-4e8a9c7896a1", Nome = "Estaciona Fácil" },
+        new { Id = "35e38ce9-bd33-4152-8df6-f8f6415a1027", Nome = "Park & Go" },
+        new { Id = "849adfa0-a25a-4aac-ae3d-c1db9e965b91", Nome = "Vaga Certa" },
+        new { Id = "5584a759-e39a-4fef-8c2d-30cafbf0c4cc", Nome = "Espaço Flex" },
+        new { Id = "fbbcc5a7-5900-46e6-b8b5-878c6292bd47", Nome = "Drive Park" }
+    };
+
+
 app.MapGet("/v1/vagas", (AppDbContext context) =>
 {
     var vagas = context.Vagas?.ToList();
+    vagas?.ForEach(v => v.NomeEstacionamento = estacionamenos.FirstOrDefault(e => Guid.Parse(e.Id) == v.IdEstacionamento)?.Nome);
     return vagas is not null
         ? Results.Ok(new { vagas })
         : Results.NotFound();
@@ -39,7 +50,12 @@ app.MapGet("/v1/vagas/{id}", (string id, AppDbContext context) =>
     if (Guid.TryParse(id, out Guid idVaga))
     {
         var vaga = context?.Vagas?.FirstOrDefault(v => v.Id == Guid.Parse(id));
-        return vaga is not null ? Results.Ok(vaga) : Results.NotFound();
+        if (vaga != null)
+        {
+            vaga.NomeEstacionamento = estacionamenos.FirstOrDefault(e => Guid.Parse(e.Id) == vaga.IdEstacionamento)?.Nome;
+            return Results.Ok(vaga);
+        }
+        return Results.NotFound();
     }
     return Results.NotFound();
 }).Produces<Vaga>();
@@ -54,6 +70,8 @@ app.MapPost("/v1/vagas", (AppDbContext context, CreateVagaViewModel model) =>
 
     context?.Vagas?.Add(vaga);
     context?.SaveChanges();
+
+    vaga.NomeEstacionamento = estacionamenos.FirstOrDefault(e => Guid.Parse(e.Id) == vaga.IdEstacionamento)?.Nome;
 
     return Results.Created($"/v1/vagas/{vaga.Id}", vaga);
 });
@@ -115,15 +133,6 @@ app.MapGet("/v1/vagas/tipos", () =>
 
 app.MapGet("/v1/estacionamentos", () =>
 {
-    var estacionamenos = new List<dynamic>
-    {
-        new { Id = "a080010f-6774-485c-826c-4e8a9c7896a1", Nome = "Estaciona Fácil" },
-        new { Id = "35e38ce9-bd33-4152-8df6-f8f6415a1027", Nome = "Park & Go" },
-        new { Id = "849adfa0-a25a-4aac-ae3d-c1db9e965b91", Nome = "Vaga Certa" },
-        new { Id = "5584a759-e39a-4fef-8c2d-30cafbf0c4cc", Nome = "Espaço Flex" },
-        new { Id = "fbbcc5a7-5900-46e6-b8b5-878c6292bd47", Nome = "Drive Park" }
-    };
-
     return Results.Ok(new { estacionamenos });
 }).Produces<object>();
 
