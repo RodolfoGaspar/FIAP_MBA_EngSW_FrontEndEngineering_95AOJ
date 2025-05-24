@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
       const validatedData = NovaVagaSchema.parse(mensagem);
       
       const msg = {
-        idVaga: validatedData.id,
+        id: validatedData.id,
         idEstacionamento: validatedData.idEstacionamento,
         nomeEstacionamento: validatedData.nomeEstacionamento,
         status: validatedData.status,
@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
       const validatedData = AlteracaoVagaSchema.parse(mensagem);
       
       const msg = {
-        idVaga: validatedData.id,
+        id: validatedData.id,
         idEstacionamento: validatedData.idEstacionamento,
         status: validatedData.status,
         tipoVaga: validatedData.tipoVaga,
@@ -82,7 +82,7 @@ io.on('connection', (socket) => {
       const validatedData = ExcluirVagaSchema.parse(mensagem);
       
       const msg = {
-        idVaga: validatedData.id,
+        id: validatedData.id,
         idClient: socket.id,
         data: new Date().toISOString()
       };
