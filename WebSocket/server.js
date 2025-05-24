@@ -5,7 +5,9 @@ const { Server } = require('socket.io');
 
 // Esquemas de validação Zod
 const NovaVagaSchema = z.object({
+  id: z.string().trim().min(1),
   idEstacionamento: z.string().trim().min(1),
+  nomeEstacionamento: z.string().trim().min(1),  
   status: z.number().int().min(0),
   tipoVaga: z.number().int().min(0),
   valorHora: z.number().min(0)
@@ -37,7 +39,12 @@ io.on('connection', (socket) => {
       const validatedData = NovaVagaSchema.parse(mensagem);
       
       const msg = {
-        ...validatedData,
+        idVaga: validatedData.id,
+        idEstacionamento: validatedData.idEstacionamento,
+        nomeEstacionamento: validatedData.nomeEstacionamento,
+        status: validatedData.status,
+        tipoVaga: validatedData.tipoVaga,
+        valorHora: validatedData.valorHora,
         idClient: socket.id,
         data: new Date().toISOString()
       };
@@ -45,10 +52,7 @@ io.on('connection', (socket) => {
       console.log('Mensagem validada - Nova Vaga:', msg);
       io.emit('notificacaoNovaVaga', msg);
     } catch (error) {
-      console.error('Erro de validação Nova Vaga:', {
-        errors: error.errors,
-        idClient: socket.id
-      });
+      console.error('Erro de validação Nova Vaga:', error.errors);
     }
   });
 
@@ -69,10 +73,7 @@ io.on('connection', (socket) => {
       console.log('Mensagem validada - Alteração de Vaga:', msg);
       io.emit('notificacaoAlteracaoDeVaga', msg);
     } catch (error) {
-      console.error('Erro de validação Alteração de Vaga:', {
-        errors: error.errors,
-        idClient: socket.id
-      });
+      console.error('Erro de validação Alteração de Vaga:', error.errors);
     }
   });
 
@@ -89,10 +90,7 @@ io.on('connection', (socket) => {
       console.log('Mensagem validada - Excluir Vaga:', msg);
       io.emit('notificacaoExcluirVaga', msg);
     } catch (error) {
-      console.error('Erro de validação Excluir Vaga:', {
-        errors: error.errors,
-        idClient: socket.id
-      });
+      console.error('Erro de validação Excluir Vaga:', error.errors);
     }
   });
 
