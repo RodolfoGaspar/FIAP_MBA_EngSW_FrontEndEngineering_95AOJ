@@ -2,8 +2,8 @@ import { DataProvider, fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
 const apiUrls = {
-  pagamentos: "http://localhost:5003/v1",
-  vagas: "http://localhost:5001/v1",
+  pagamentos: "https://pagamentosapi-production.up.railway.app/v1",
+  vagas: "https://vagasapi-production.up.railway.app/v1",
 };
 
 const httpClient = (url: string, options: fetchUtils.Options = {}) => {

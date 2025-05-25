@@ -1,8 +1,9 @@
 import { Edit, SimpleForm, TextInput, SelectInput } from "react-admin";
 import useBuscaTipoVaga from "../../api/hooks/useBuscaTipoVaga";
 import useBuscaStatus from "../../api/hooks/useBuscaStatus";
-import { Grid2 } from "@mui/material";
+import { Grid, Typography, Paper, Box } from "@mui/material";
 import useBuscaEstacionamentos from "../../api/hooks/useBuscaEstacionamentos";
+import { required, number } from "react-admin";
 
 export const VagasEdit = () => {
   const { data, loading, error } = useBuscaStatus();
@@ -22,52 +23,80 @@ export const VagasEdit = () => {
   return (
     <Edit>
       <SimpleForm>
-        <Grid2 container spacing={2} sx={{ width: "100%" }}>
-          <Grid2 size={{ xs: 12, md: 6 }}>
-            <SelectInput
-              fullWidth
-              source="status"
-              disabled={loading}
-              choices={data?.map((status) => ({
-                id: status.id,
-                name: status.name,
-              }))}
-              optionText="name"
-              optionValue="id"
-            />
-          </Grid2>
-          <Grid2 size={{ xs: 12, md: 6 }}>
-            <SelectInput
-              fullWidth
-              label="Tipo vaga"
-              source="tipoVaga"
-              disabled={loadingTipo}
-              choices={tipo?.map((status) => ({
-                id: status.id,
-                name: status.name,
-              }))}
-              optionText="name"
-              optionValue="id"
-            />
-          </Grid2>
-          <Grid2 size={{ xs: 12, md: 6 }}>
-            <TextInput type="number" fullWidth source="valorHora" />
-          </Grid2>
-          <Grid2 size={{ xs: 12, md: 6 }}>
-            <SelectInput
-              fullWidth
-              label="ID Estacionamento"
-              source="idEstacionamento"
-              disabled={loadingEstacionamento}
-              choices={estacionamentos?.map((estacionamento) => ({
-                id: estacionamento.id,
-                name: estacionamento.nome,
-              }))}
-              optionText="name"
-              optionValue="id"
-            />
-          </Grid2>
-        </Grid2>
+        <Box sx={{ maxWidth: 800, margin: "0 auto", padding: 2 }}>
+          <Typography
+            variant="h6"
+            sx={{ marginBottom: 2, color: "primary.main" }}
+          >
+            Informações da Vaga
+          </Typography>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <SelectInput
+                fullWidth
+                source="status"
+                label="Status da Vaga"
+                disabled={loading}
+                choices={data?.map((status) => ({
+                  id: status.id,
+                  name: status.name,
+                }))}
+                optionText="name"
+                optionValue="id"
+                validate={required()}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <SelectInput
+                fullWidth
+                label="Tipo de Vaga"
+                source="tipoVaga"
+                disabled={loadingTipo}
+                choices={tipo?.map((status) => ({
+                  id: status.id,
+                  name: status.name,
+                }))}
+                optionText="name"
+                optionValue="id"
+                validate={required()}
+              />
+            </Grid>
+          </Grid>
+
+          <Typography
+            variant="h6"
+            sx={{ marginBottom: 2, color: "primary.main" }}
+          >
+            Configurações Financeiras e Localização
+          </Typography>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <TextInput
+                type="number"
+                fullWidth
+                source="valorHora"
+                label="Valor por Hora (R$)"
+                validate={[required(), number()]}
+                sx={{ "& input": { textAlign: "right" } }}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <SelectInput
+                fullWidth
+                label="Estacionamento"
+                source="idEstacionamento"
+                disabled={loadingEstacionamento}
+                choices={estacionamentos?.map((estacionamento) => ({
+                  id: estacionamento.id,
+                  name: estacionamento.nome,
+                }))}
+                optionText="name"
+                optionValue="id"
+                validate={required()}
+              />
+            </Grid>
+          </Grid>
+        </Box>
       </SimpleForm>
     </Edit>
   );
