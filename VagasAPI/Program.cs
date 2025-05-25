@@ -6,7 +6,8 @@ using System.Text.Json;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuração do cliente WebSocket
-var socket = new SocketIOClient.SocketIO("http://localhost:5004", new SocketIOOptions
+//var socket = new SocketIOClient.SocketIO("http://localhost:5004", new SocketIOOptions
+var socket = new SocketIOClient.SocketIO("https://smartparkwebsocket-production.up.railway.app", new SocketIOOptions
 {
     Reconnection = true,
     ReconnectionAttempts = 10,
