@@ -15,6 +15,7 @@ O SmartPark é uma solução completa para gerenciamento de estacionamentos, ofe
 
 ### Frontend
 - React.js
+- React Native
 - TypeScript
 - Material-UI (MUI)
 - Socket.IO Client
@@ -37,6 +38,11 @@ O SmartPark é uma solução completa para gerenciamento de estacionamentos, ofe
 ```bash
 git clone https://github.com/rodolfocruz/FIAP_MBA_EngSW_FrontEndEngineering_95AOJ.git
 cd FIAP_MBA_EngSW_FrontEndEngineering_95AOJ
+```
+**App React Native**
+```bash
+https://github.com/ThomasWeyand/SmartParkUser.git
+cd SmartParkUser
 ```
 
 2. Backend
@@ -101,6 +107,11 @@ npm start
 
 ### Frontend
 - Produção: https://smartpark-frontend.vercel.app
+
+### Frontend React Native App(user side)
+- https://github.com/ThomasWeyand/SmartParkUser
+- Documentaçao para build e run do projeto
+- **app que consome as notificações emitidas via Web Socket**
 
 ### Backend
 - VagasAPI: https://vagasapi-production.up.railway.app
