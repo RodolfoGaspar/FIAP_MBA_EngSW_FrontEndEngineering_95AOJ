@@ -28,11 +28,16 @@ const ExcluirVagaSchema = z.object({
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-  cors: { origin: "*" } 
+  cors: { origin: "*" },
+  pingTimeout: 10000,    // 10 segundos para timeout do ping
+  pingInterval: 5000,    // 5 segundos entre pings
+  connectTimeout: 20000, // 20 segundos para timeout de conexão
+  transports: ['websocket'],
+  allowEIO3: true
 });
 
 io.on('connection', (socket) => {
-  console.log('Cliente conectado:', socket.id);
+  console.log('Cliente conectado:', socket.id, 'em:', new Date().toISOString());
 
   socket.on('notificacaoNovaVaga', (mensagem) => {
     try {
@@ -94,8 +99,12 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('disconnect', () => {
-    console.log('Cliente desconectado:', socket.id);
+  socket.on('disconnect', (reason) => {
+    console.log('Cliente desconectado:', socket.id, 'Razão:', reason, 'em:', new Date().toISOString());
+  });
+
+  socket.on('error', (error) => {
+    console.error('Erro no socket:', socket.id, error);
   });
 });
 
