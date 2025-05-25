@@ -5,49 +5,67 @@ import {
   EditButton,
   DeleteButton,
 } from "react-admin";
-import { Pagamento } from "../../interfaces/Pagamentos";
 import MetodoPagamentoChip from "../../components/MetodoPagamentoChip";
 import StatusPagamentoChip from "../../components/StatusPagamentoChipProps ";
+import { Paper, Typography, Box } from "@mui/material";
+
+const blue = '#2176ae';
 
 export const PagamentosList = () => (
   <List>
-    <Datagrid>
-      <FunctionField
-        source="id"
-        render={(record: Pagamento) => `${record.id?.slice(0, 8)}...`}
-      />
-      <FunctionField
-        source="idReserva"
-        render={(record: Pagamento) => `${record.idReserva?.slice(0, 8)}...`}
-      />
-      <FunctionField
-        source="idUsuario"
-        render={(record: Pagamento) => `${record.idUsuario?.slice(0, 8)}...`}
-      />
-      <FunctionField
-        source="metodoPagamento"
-        render={(record: Pagamento) => (
-          <MetodoPagamentoChip metodoPagamento={record.metodoPagamento} />
-        )}
-      />
-      <FunctionField
-        source="statusPagamento"
-        render={(record: Pagamento) => (
-          <StatusPagamentoChip statusPagamento={record.statusPagamento} />
-        )}
-      />
-      <FunctionField
-        source="valor"
-        render={(record: Pagamento) => `R$${record.valor},00`}
-      />
-      <FunctionField
-        source="criadoEm"
-        render={(record: Pagamento) =>
-          new Date(record.criadoEm).toLocaleString()
-        }
-      />
-      <EditButton />
-      <DeleteButton />
-    </Datagrid>
+    <Box sx={{ width: '100%', padding: 2 }}>
+      <Paper elevation={3} sx={{ padding: 3, background: '#fff', borderRadius: 3 }}>
+        <Typography variant="h5" sx={{ color: blue, fontWeight: 700, mb: 2, fontFamily: 'Montserrat, Roboto, sans-serif' }}>
+          Pagamentos
+        </Typography>
+        <Datagrid rowClick="show">
+          <FunctionField
+            label="ID"
+            source="id"
+            render={(record) => `${record.id?.slice(0, 8)}...`}
+          />
+          <FunctionField
+            label="Reserva"
+            source="idReserva"
+            render={(record) => `${record.idReserva?.slice(0, 8)}...`}
+          />
+          <FunctionField
+            label="Usuário"
+            source="idUsuario"
+            render={(record) => `${record.idUsuario?.slice(0, 8)}...`}
+          />
+          <FunctionField
+            label="Método"
+            source="metodoPagamento"
+            render={(record) => (
+              <MetodoPagamentoChip metodoPagamento={record.metodoPagamento} />
+            )}
+          />
+          <FunctionField
+            label="Status"
+            source="statusPagamento"
+            render={(record) => (
+              <StatusPagamentoChip statusPagamento={record.statusPagamento} />
+            )}
+          />
+          <FunctionField
+            label="Valor"
+            source="valor"
+            render={(record) => (
+              <Typography variant="body2" sx={{ color: blue, fontWeight: 600 }}>
+                R${record.valor},00
+              </Typography>
+            )}
+          />
+          <FunctionField
+            label="Criado em"
+            source="criadoEm"
+            render={(record) => new Date(record.criadoEm).toLocaleString()}
+          />
+          <EditButton />
+          <DeleteButton />
+        </Datagrid>
+      </Paper>
+    </Box>
   </List>
 );
