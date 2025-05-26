@@ -11,7 +11,7 @@ O diagrama abaixo representa o fluxo de dados entre os sistemas envolvidos:
 - O backend em **Node.js** processa essas requisições e emite notificações em tempo real usando **WebSocket**.
 - O aplicativo mobile feito em **React Native** recebe essas notificações e atualiza a lista de vagas instantaneamente, sem a necessidade de recarregar.
 
-![Fluxo do sistema](./assets/fluxo-smartpark.png)
+![Fluxo do sistema](https://i.imgur.com/bwNGuKn.png)
 
 ## 🚀 Tecnologias Utilizadas
 
