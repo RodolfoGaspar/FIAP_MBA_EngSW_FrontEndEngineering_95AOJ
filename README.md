@@ -3,6 +3,16 @@
 ## 📝 Resumo da Aplicação
 O SmartPark é uma solução completa para gerenciamento de estacionamentos, oferecendo funcionalidades de controle de vagas, reservas e pagamentos em tempo real. O sistema permite o gerenciamento eficiente de vagas de estacionamento, com notificações em tempo real sobre disponibilidade, alterações e exclusões de vagas.
 
+## 🔄 Fluxo de Comunicação
+
+O diagrama abaixo representa o fluxo de dados entre os sistemas envolvidos:
+
+- O **Front-end Web**, utilizado pelos estacionamentos parceiros, realiza chamadas de API para **criar, alterar ou excluir vagas**.
+- O backend em **Node.js** processa essas requisições e emite notificações em tempo real usando **WebSocket**.
+- O aplicativo mobile feito em **React Native** recebe essas notificações e atualiza a lista de vagas instantaneamente, sem a necessidade de recarregar.
+
+![Fluxo do sistema](./assets/fluxo-smartpark.png)
+
 ## 🚀 Tecnologias Utilizadas
 
 ### Backend
