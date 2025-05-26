@@ -106,7 +106,7 @@ npm start
 ## 🌐 Links da Aplicação
 
 ### Frontend
-- Produção: [https://smartpark-frontend.vercel.app](https://backoffice-smartpark-v1.vercel.app/#/vagas)
+- Produção: https://backoffice-smartpark-v1.vercel.app/#/vagas
 
 ### Frontend React Native App (user side)
 - https://github.com/ThomasWeyand/SmartParkUser
