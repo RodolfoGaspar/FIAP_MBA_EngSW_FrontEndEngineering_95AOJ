@@ -108,7 +108,7 @@ npm start
 ### Frontend
 - Produção: https://smartpark-frontend.vercel.app
 
-### Frontend React Native App(user side)
+### Frontend React Native App (user side)
 - https://github.com/ThomasWeyand/SmartParkUser
 - Documentaçao para build e run do projeto
 - **app que consome as notificações emitidas via Web Socket**
@@ -145,7 +145,7 @@ npm start
 3. Teste os endpoints disponíveis
 
 #### Via Postman
-1. Importe a coleção do Postman localizada em `[Postman](https://smart-park-7334.postman.co/workspace/FIAP_95AOJ_FRONT~580660b0-422c-40a9-9bd4-89d0b5e84554/overview)`
+1. Importe a coleção do Postman localizada em [Postman](https://smart-park-7334.postman.co/workspace/FIAP_95AOJ_FRONT~580660b0-422c-40a9-9bd4-89d0b5e84554/overview)
 2. Configure as variáveis de ambiente:
    - `base_url_vagas`: https://vagasapi-production.up.railway.app
    - `base_url_pagamentos`: https://pagamentosapi-production.up.railway.app
