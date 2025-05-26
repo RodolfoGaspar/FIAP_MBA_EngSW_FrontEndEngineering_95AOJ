@@ -34,7 +34,7 @@ O SmartPark é uma solução completa para gerenciamento de estacionamentos, ofe
 
 ### Passos para Execução
 
-1. Clone o Repositório
+#### 1. Clone o Repositório
 ```bash
 git clone https://github.com/rodolfocruz/FIAP_MBA_EngSW_FrontEndEngineering_95AOJ.git
 cd FIAP_MBA_EngSW_FrontEndEngineering_95AOJ
@@ -45,9 +45,9 @@ https://github.com/ThomasWeyand/SmartParkUser.git
 cd SmartParkUser
 ```
 
-2. Backend
+#### 2. Backend
 
-#### VagasAPI
+##### VagasAPI
 ```bash
 cd VagasAPI
 dotnet restore
@@ -59,7 +59,7 @@ dotnet run
 - URL Produção: https://vagasapi-production.up.railway.app
 - Swagger Produção: https://vagasapi-production.up.railway.app/swagger
 
-#### PagamentosAPI
+##### PagamentosAPI
 ```bash
 cd PagamentosAPI
 dotnet restore
@@ -71,7 +71,7 @@ dotnet run
 - URL Produção: https://pagamentosapi-production.up.railway.app
 - Swagger Produção: https://pagamentosapi-production.up.railway.app/swagger
 
-#### ReservasAPI
+##### ReservasAPI
 ```bash
 cd ReservasAPI
 dotnet restore
@@ -83,7 +83,7 @@ dotnet run
 - URL Produção: https://reservasapi-production-4e97.up.railway.app
 - Swagger Produção: https://reservasapi-production-4e97.up.railway.app/swagger
 
-#### WebSocket
+##### WebSocket
 ```bash
 cd WebSocket
 npm install
@@ -92,9 +92,9 @@ npm start
 - URL Local: http://localhost:5004
 - URL Produção: https://smartparkwebsocket-production.up.railway.app
 
-3. Frontend
+#### 3. Frontend
 
-#### BackOffice-SmartPark
+##### BackOffice-SmartPark
 ```bash
 cd BackOffice-SmartPark
 npm install
@@ -106,9 +106,9 @@ npm start
 ## 🌐 Links da Aplicação
 
 ### Frontend
-- Produção: https://smartpark-frontend.vercel.app
+- Produção: https://backoffice-smartpark-v1.vercel.app/#/vagas
 
-### Frontend React Native App(user side)
+### Frontend React Native App (user side)
 - https://github.com/ThomasWeyand/SmartParkUser
 - Documentaçao para build e run do projeto
 - **app que consome as notificações emitidas via Web Socket**
@@ -145,26 +145,12 @@ npm start
 3. Teste os endpoints disponíveis
 
 #### Via Postman
-1. Importe a coleção do Postman localizada em `/Postman`
+1. Importe a coleção do Postman localizada em [Postman](https://smart-park-7334.postman.co/workspace/FIAP_95AOJ_FRONT~580660b0-422c-40a9-9bd4-89d0b5e84554/overview)
 2. Configure as variáveis de ambiente:
    - `base_url_vagas`: https://vagasapi-production.up.railway.app
    - `base_url_pagamentos`: https://pagamentosapi-production.up.railway.app
    - `base_url_reservas`: https://reservasapi-production.up.railway.app
    - `websocket_url`: https://smartparkwebsocket-production.up.railway.app
-
-### Frontend
-
-#### Testes Unitários
-```bash
-cd BackOffice-SmartPark
-npm test
-```
-
-#### Testes E2E (Cypress)
-```bash
-cd BackOffice-SmartPark
-npm run cypress:open
-```
 
 ## 📦 Endpoints Principais
 
@@ -245,13 +231,4 @@ docker run -p 3000:3000 smartpark-frontend
 - Gerenciamento de estado com React Query
 - Comunicação em tempo real com Socket.IO
 - Roteamento com React Router
-- Testes unitários com Jest
-- Testes E2E com Cypress
 
-## 🤝 Contribuição
-
-1. Faça o fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
