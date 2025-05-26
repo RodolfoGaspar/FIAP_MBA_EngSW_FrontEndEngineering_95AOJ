@@ -145,26 +145,12 @@ npm start
 3. Teste os endpoints disponíveis
 
 #### Via Postman
-1. Importe a coleção do Postman localizada em `/Postman`
+1. Importe a coleção do Postman localizada em `[Postman](https://smart-park-7334.postman.co/workspace/FIAP_95AOJ_FRONT~580660b0-422c-40a9-9bd4-89d0b5e84554/overview)`
 2. Configure as variáveis de ambiente:
    - `base_url_vagas`: https://vagasapi-production.up.railway.app
    - `base_url_pagamentos`: https://pagamentosapi-production.up.railway.app
    - `base_url_reservas`: https://reservasapi-production.up.railway.app
    - `websocket_url`: https://smartparkwebsocket-production.up.railway.app
-
-### Frontend
-
-#### Testes Unitários
-```bash
-cd BackOffice-SmartPark
-npm test
-```
-
-#### Testes E2E (Cypress)
-```bash
-cd BackOffice-SmartPark
-npm run cypress:open
-```
 
 ## 📦 Endpoints Principais
 
